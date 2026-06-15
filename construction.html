@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>New Era Home Construction & Remodeling — Southern California</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --black:    #050403;
+      --navy:     #06091D;
+      --forest:   #050D07;
+      --slate:    #060810;
+      --warm:     #0C0806;
+      --border:   rgba(237,232,224,.07);
+      --borderM:  rgba(237,232,224,.12);
+      --orange:   #E8621A;
+      --teal:     #1A9080;
+      --gold:     #C4920A;
+      --cream:    #EDE8E0;
+      --cdim:     rgba(237,232,224,.65);
+      --cmute:    rgba(237,232,224,.35);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--black);color:var(--cream);font-family:'DM Sans',sans-serif;line-height:1.7;overflow-x:hidden;cursor:none}
+    body.loading{overflow:hidden}
+    ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--black)}::-webkit-scrollbar-thumb{background:var(--orange)}
+
+    /* NOISE */
+    .noise{position:fixed;inset:0;pointer-events:none;z-index:4500;opacity:.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:160px}
+
+    /* CURSOR */
+    .cur-dot{position:fixed;top:0;left:0;width:7px;height:7px;background:var(--orange);border-radius:50%;pointer-events:none;z-index:8000;transform:translate(-50%,-50%)}
+    .cur-ring{position:fixed;top:0;left:0;width:36px;height:36px;border:1.5px solid rgba(232,98,26,.4);border-radius:50%;pointer-events:none;z-index:7999;transform:translate(-50%,-50%);transition:width .3s cubic-bezier(.34,1.56,.64,1),height .3s cubic-bezier(.34,1.56,.64,1),border-color .25s}
+    body.ch .cur-ring{width:58px;height:58px;border-color:var(--orange)}
+
+    /* SCROLL PROGRESS */
+    .scroll-prog{position:fixed;top:0;left:0;height:2px;z-index:6000;background:linear-gradient(90deg,var(--orange),var(--gold));transform:scaleX(0);transform-origin:left;width:100%}
+
+    /* PRELOADER */
+    #preloader{position:fixed;inset:0;z-index:10000;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .pre-logo{width:88px;margin-bottom:56px;opacity:0;transition:opacity .7s cubic-bezier(.16,1,.3,1)}
+    .pre-logo.vis{opacity:1}
+    .pre-counter{font-family:'Cormorant Garamond',serif;font-size:clamp(4.5rem,11vw,9rem);font-weight:300;color:var(--cream);line-height:1;letter-spacing:-.04em;margin-bottom:36px}
+    .pre-counter em{color:var(--orange);font-style:normal}
+    .pre-bar{width:200px;height:1px;background:rgba(237,232,224,.1);overflow:hidden}
+    .pre-bar-f{height:100%;background:var(--orange);transform:scaleX(0);transform-origin:left}
+    .pre-lbl{font-size:.625rem;letter-spacing:.22em;text-transform:uppercase;color:var(--cmute);margin-top:16px}
+    .pre-curtain{position:fixed;inset:0;z-index:9999;background:var(--orange);transform:scaleY(0);transform-origin:top;pointer-events:none}
+
+    /* NAV — hides on scroll-down, reappears on scroll-up */
+    #nav{
+      position:fixed;top:22px;left:50%;
+      transform:translateX(-50%) translateY(0);
+      z-index:5000;display:flex;align-items:center;
+      background:rgba(6,9,29,.82);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
+      border:1px solid var(--borderM);border-radius:100px;
+      padding:12px 10px 12px 18px;
+      opacity:0;
+      transition:transform .45s cubic-bezier(.16,1,.3,1), opacity .4s
+    }
+    #nav.vis{opacity:1}
+    #nav.hide{transform:translateX(-50%) translateY(-180%);opacity:0}
+    .nav-logo{height:24px;flex-shrink:0}
+    .nav-links{display:flex;gap:26px;list-style:none;margin-right:18px}
+    .nav-links a{color:var(--cdim);text-decoration:none;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;transition:color .2s;position:relative}
+    .nav-links a::after{content:'';position:absolute;left:0;bottom:-2px;width:0;height:1px;background:var(--orange);transition:width .3s cubic-bezier(.16,1,.3,1)}
+    .nav-links a:hover{color:#fff}
+    .nav-links a:hover::after{width:100%}
+    .nav-cta{background:var(--orange);color:#fff;text-decoration:none;padding:9px 20px;border-radius:100px;font-size:.78rem;font-weight:500;letter-spacing:.04em;cursor:none;white-space:nowrap;transition:opacity .2s,transform .3s cubic-bezier(.34,1.56,.64,1)}
+    .nav-cta:hover{opacity:.85;transform:scale(1.06)}
+
+    /* HERO */
+    #hero{display:grid;grid-template-columns:56% 44%;height:100vh;min-height:700px;overflow:hidden;position:relative}
+    .hero-left{padding:110px 80px 56px;display:flex;flex-direction:column;justify-content:flex-start;position:relative;z-index:2}
+
+    /* orbs */
+    .orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(90px);animation:orbf 9s ease-in-out infinite}
+    .orb-1{width:380px;height:380px;background:rgba(232,98,26,.07);top:-60px;left:-60px}
+    .orb-2{width:280px;height:280px;background:rgba(26,144,128,.05);bottom:40px;right:-40px;animation-delay:-4s}
+    .orb-3{width:220px;height:220px;background:rgba(196,146,10,.04);top:50%;left:40%;animation-delay:-7s}
+    @keyframes orbf{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-28px) scale(1.09)}}
+
+    .hero-brand{display:flex;align-items:center;gap:14px;margin-bottom:20px;opacity:0;transform:translateY(18px)}
+    .hero-brand img{height:36px}
+    .hero-brand-sep{width:1px;height:26px;background:var(--borderM)}
+    .hero-brand-name{font-size:.6875rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cdim)}
+
+    .hero-eye{display:inline-flex;align-items:center;gap:10px;font-size:.6875rem;letter-spacing:.22em;text-transform:uppercase;color:var(--orange);margin-bottom:24px;opacity:0;transform:translateY(14px)}
+    .hero-eye::before{content:'';width:22px;height:1px;background:var(--orange)}
+
+    .hero-h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(3.5rem,7.5vw,7.5rem);line-height:.93;letter-spacing:-.03em;margin-bottom:34px}
+    .hl{overflow:hidden;display:block}
+    .hl-i{display:block;opacity:0;transform:translateY(108%)}
+    .hl-i em{font-style:italic;color:var(--orange)}
+
+    .hero-sub{font-size:1rem;font-weight:300;color:var(--cdim);line-height:1.82;max-width:400px;margin-bottom:42px;opacity:0;transform:translateY(14px)}
+    .hero-btns{display:flex;align-items:center;gap:22px;margin-bottom:52px;opacity:0;transform:translateY(14px)}
+
+    .btn-o{background:var(--orange);color:#fff;padding:15px 36px;font-size:.9375rem;font-weight:500;letter-spacing:.04em;text-decoration:none;display:inline-block;cursor:none;position:relative;overflow:hidden;transition:transform .15s cubic-bezier(.16,1,.3,1)}
+    .btn-o::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.18);transform:translateX(-101%);transition:transform .4s cubic-bezier(.16,1,.3,1)}
+    .btn-o:hover::before{transform:translateX(0)}
+    .btn-o:hover{transform:translateY(-2px)}
+    .btn-ghost{color:var(--cdim);text-decoration:none;font-size:.9375rem;font-weight:300;display:inline-flex;align-items:center;gap:8px;border-bottom:1px solid rgba(237,232,224,.25);padding-bottom:2px;transition:color .2s,border-color .2s;cursor:none}
+    .btn-ghost:hover{color:var(--orange);border-color:var(--orange)}
+
+    .hero-stats{display:flex;gap:32px;border-top:1px solid var(--border);padding-top:26px;opacity:0;transform:translateY(14px)}
+    .hs-n{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--cream);line-height:1}
+    .hs-n em{font-style:normal;color:var(--orange)}
+    .hs-l{font-size:.625rem;color:var(--cmute);text-transform:uppercase;letter-spacing:.14em;margin-top:5px}
+
+    /* HERO RIGHT — slideshow */
+    .hero-right{position:relative;overflow:hidden}
+    .slide{position:absolute;inset:-8%;background-size:cover;background-position:center;opacity:0;transform:scale(1.07);transition:opacity 1.4s cubic-bezier(.16,1,.3,1),transform 7s cubic-bezier(.16,1,.3,1)}
+    .slide.active{opacity:1;transform:scale(1)}
+    .slide-ov{position:absolute;inset:0;background:linear-gradient(to right,var(--black) 0%,rgba(5,4,3,.2) 30%,transparent 55%),linear-gradient(to top,rgba(5,4,3,.55) 0%,transparent 50%)}
+    .rot-badge{position:absolute;bottom:48px;right:48px;width:108px;height:108px;animation:spin 22s linear infinite;z-index:2}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .slide-timing{position:absolute;bottom:0;left:0;right:0;height:2px;background:rgba(237,232,224,.1);z-index:3}
+    .stf{height:100%;background:var(--orange);transform:scaleX(0);transform-origin:left}
+    .stf.run{transform:scaleX(1);transition:transform 5s linear}
+    .slide-dots{position:absolute;bottom:16px;right:56px;display:flex;gap:8px;z-index:3}
+    .sdot{width:20px;height:2px;background:rgba(237,232,224,.3);cursor:none;transition:background .3s,width .3s}
+    .sdot.on{background:var(--orange);width:32px}
+
+    /* MARQUEE */
+    .mq-wrap{background:var(--orange);overflow:hidden}
+    .mq-track{display:flex;width:max-content;animation:mq 22s linear infinite;padding:14px 0}
+    .mq-track:hover{animation-play-state:paused}
+    @keyframes mq{to{transform:translateX(-50%)}}
+    .mqi{display:inline-flex;align-items:center;gap:16px;padding:0 20px;font-size:.75rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#fff;white-space:nowrap}
+    .mdot{width:4px;height:4px;background:rgba(255,255,255,.45);border-radius:50%;flex-shrink:0}
+
+    /* SHARED */
+    .sec-lbl{display:inline-flex;align-items:center;gap:11px;font-size:.6875rem;letter-spacing:.22em;text-transform:uppercase;color:var(--orange);margin-bottom:14px}
+    .sec-lbl::before{content:'';width:20px;height:1px;background:var(--orange)}
+    .sec-lbl.teal{color:var(--teal)}
+    .sec-lbl.teal::before{background:var(--teal)}
+    .sec-lbl.gold{color:var(--gold)}
+    .sec-lbl.gold::before{background:var(--gold)}
+    .sec-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4.75rem);font-weight:300;line-height:1;letter-spacing:-.03em;color:var(--cream)}
+    .sec-h2 em{font-style:italic;color:var(--orange)}
+    .sec-h2.teal em{color:var(--teal)}
+    .sec-h2.gold em{color:var(--gold)}
+
+    /* REVEALS */
+    .rv{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+    .rv.on{opacity:1;transform:translateY(0)}
+    .rv-l{opacity:0;transform:translateX(-36px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+    .rv-l.on{opacity:1;transform:translateX(0)}
+    .rv-r{opacity:0;transform:translateX(36px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+    .rv-r.on{opacity:1;transform:translateX(0)}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+    /* SERVICES */
+    #services{padding:120px 88px;position:relative;overflow:hidden}
+    .svc-orb{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(232,98,26,.05) 0%,transparent 70%);top:-200px;right:-200px;pointer-events:none}
+    .svc-header{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end;margin-bottom:72px}
+    .svc-intro{font-size:1rem;font-weight:300;color:var(--cdim);line-height:1.85}
+    .svc-rows{border-top:1px solid var(--border)}
+    .svc-row{
+      display:flex;align-items:center;gap:24px;
+      padding:30px 0;border-bottom:1px solid var(--border);
+      cursor:none;position:relative;
+      transition:padding-left .4s cubic-bezier(.16,1,.3,1), background .3s, border-color .3s
+    }
+    .svc-row::before{
+      content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+      background:linear-gradient(to bottom,var(--orange),var(--gold));
+      transform:scaleY(0);transform-origin:bottom;
+      transition:transform .4s cubic-bezier(.34,1.56,.64,1)
+    }
+    .svc-row:hover::before{transform:scaleY(1)}
+    .svc-row:hover{padding-left:18px;border-bottom-color:rgba(232,98,26,.3);background:rgba(232,98,26,.025)}
+    .svc-num{font-family:'Cormorant Garamond',serif;font-size:.875rem;color:var(--cmute);width:50px;flex-shrink:0;letter-spacing:.06em;transition:color .3s}
+    .svc-row:hover .svc-num{color:var(--orange)}
+    .svc-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.75rem,3vw,3rem);font-weight:300;color:var(--cream);letter-spacing:-.02em;line-height:1;flex:1;transition:transform .4s cubic-bezier(.16,1,.3,1),letter-spacing .4s}
+    .svc-row:hover .svc-title{transform:translateX(8px);letter-spacing:-.01em}
+    .svc-tag{font-size:.6875rem;color:var(--cmute);letter-spacing:.1em;text-transform:uppercase;flex-shrink:0;opacity:0;transition:opacity .35s,color .3s}
+    .svc-row:hover .svc-tag{opacity:1;color:var(--cdim)}
+    .svc-arrow{
+      width:44px;height:44px;border:1px solid var(--border);border-radius:50%;
+      display:flex;align-items:center;justify-content:center;color:var(--cmute);flex-shrink:0;
+      transition:border-color .3s,color .3s,background .3s,transform .45s cubic-bezier(.34,1.56,.64,1)
+    }
+    .svc-row:hover .svc-arrow{border-color:var(--orange);background:var(--orange);color:#fff;transform:rotate(45deg)}
+
+    /* ABOUT — deep navy right column */
+    #about{display:grid;grid-template-columns:52% 48%;min-height:84vh}
+    .about-img{position:relative;overflow:hidden}
+    .about-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 8s cubic-bezier(.16,1,.3,1)}
+    .about-img:hover img{transform:scale(1.04)}
+    .about-img-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(6,9,29,.3) 0%,transparent 50%),linear-gradient(to top,rgba(6,9,29,.7) 0%,transparent 40%)}
+    .about-logo-stamp{position:absolute;bottom:40px;left:40px}
+    .about-logo-stamp img{height:52px;opacity:.92}
+    .about-badge{position:absolute;top:36px;right:36px;background:rgba(232,98,26,.9);backdrop-filter:blur(12px);padding:20px 24px;border-left:2px solid #fff}
+    .ab-n{font-family:'Cormorant Garamond',serif;font-size:2.75rem;font-weight:300;line-height:1;color:#fff}
+    .ab-t{font-size:.625rem;color:rgba(255,255,255,.8);text-transform:uppercase;letter-spacing:.1em;margin-top:6px}
+    .about-txt{background:var(--navy);padding:96px 72px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+    /* teal accent line on left of about-txt */
+    .about-txt::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:2px;background:linear-gradient(to bottom,transparent,var(--teal),transparent)}
+    .about-bg-logo{position:absolute;bottom:-40px;right:-20px;opacity:.04;pointer-events:none}
+    .about-bg-logo img{height:300px;opacity:.06}
+    .about-pull{font-family:'Cormorant Garamond',serif;font-size:clamp(1.25rem,2vw,1.75rem);font-weight:300;font-style:italic;color:var(--cream);line-height:1.6;margin:24px 0 30px;padding-left:22px;border-left:2px solid var(--teal)}
+    .about-body{font-size:.9375rem;font-weight:300;color:var(--cdim);line-height:1.9;margin-bottom:40px}
+    .about-tags{display:flex;flex-wrap:wrap;gap:8px}
+    .about-tag{background:rgba(26,144,128,.08);border:1px solid rgba(26,144,128,.25);padding:6px 14px;font-size:.6875rem;color:rgba(26,144,128,.9);letter-spacing:.08em;text-transform:uppercase;transition:border-color .25s,color .25s,background .25s;cursor:none}
+    .about-tag:hover{background:rgba(26,144,128,.15);border-color:var(--teal);color:var(--teal)}
+
+    /* STATS — deep forest green */
+    #stats{background:var(--forest);border-top:1px solid rgba(26,80,30,.3);border-bottom:1px solid rgba(26,80,30,.3)}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+    .stat-c{padding:72px 52px;border-right:1px solid rgba(26,80,30,.3);position:relative;overflow:hidden}
+    .stat-c:last-child{border-right:none}
+    .stat-c::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+    .stat-c:hover::after{transform:scaleX(1)}
+    .stat-big{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,6vw,6.5rem);font-weight:300;line-height:1;letter-spacing:-.035em;color:var(--cream);display:flex;align-items:baseline;gap:3px}
+    .stat-suf{font-size:.5em;color:var(--gold)}
+    .stat-lbl{font-size:.625rem;text-transform:uppercase;letter-spacing:.16em;color:rgba(26,144,128,.8);margin-top:12px}
+
+    /* PORTFOLIO */
+    #portfolio{padding:120px 0;overflow:hidden;background:var(--black)}
+    .port-hdr{padding:0 88px;display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px}
+    .drag-h{display:flex;align-items:center;gap:9px;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cmute)}
+    .darr{color:var(--orange)}
+    .port-ctrl{padding:0 88px;display:flex;align-items:center;gap:18px;margin-bottom:24px}
+    .port-timing{flex:1;height:2px;background:rgba(237,232,224,.07);overflow:hidden}
+    .ptf{height:100%;background:var(--orange);transform:scaleX(0);transform-origin:left}
+    .ptf.run{transform:scaleX(1);transition:transform 4.5s linear}
+    .port-dots{display:flex;gap:8px}
+    .pdot{width:20px;height:2px;background:rgba(237,232,224,.22);cursor:none;transition:background .3s,width .3s}
+    .pdot.on{background:var(--orange);width:32px}
+    .port-track{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;cursor:grab;scrollbar-width:none;padding:0 88px}
+    .port-track::-webkit-scrollbar{display:none}
+    .port-track.drag{cursor:grabbing}
+    .port-card{flex:0 0 66vw;height:70vh;min-height:460px;scroll-snap-align:start;position:relative;overflow:hidden}
+    .port-card.end{flex:0 0 30vw}
+    .port-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+    .port-card:hover img{transform:scale(1.06)}
+    .port-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,4,3,.9) 0%,rgba(5,4,3,.15) 50%,transparent 75%);opacity:0;transition:opacity .4s}
+    .port-card:hover .port-grad{opacity:1}
+    .port-info{position:absolute;bottom:32px;left:32px;right:32px;opacity:0;transform:translateY(14px);transition:opacity .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
+    .port-card:hover .port-info{opacity:1;transform:translateY(0)}
+    .port-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:#fff}
+    .port-sub{font-size:.75rem;color:rgba(255,255,255,.55);letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+    .port-end-in{background:var(--slate);border:1px solid rgba(26,144,128,.2);height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:32px}
+    .port-end-h{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--cream);line-height:1.1;letter-spacing:-.02em;margin-bottom:20px}
+    .port-end-lnk{display:inline-flex;align-items:center;gap:8px;font-size:.875rem;color:var(--teal);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--teal);padding-bottom:2px;cursor:none;transition:color .2s,border-color .2s}
+    .port-end-lnk:hover{color:#fff;border-color:#fff}
+
+    /* PROCESS — deep slate blue */
+    #process{background:var(--slate);padding:128px 0}
+    .proc-inner{display:grid;grid-template-columns:48% 52%;min-height:600px}
+    .proc-img-col{position:relative;overflow:hidden}
+    .proc-img-col img{width:100%;height:100%;object-fit:cover;display:block}
+    .proc-img-ov{position:absolute;inset:0;background:linear-gradient(to right,transparent 60%,var(--slate)),linear-gradient(to top,rgba(6,8,16,.5) 0%,transparent 40%)}
+    .proc-img-tag{position:absolute;bottom:36px;left:36px;background:rgba(26,144,128,.18);border:1px solid rgba(26,144,128,.3);padding:10px 16px;font-size:.625rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(26,144,128,.9);backdrop-filter:blur(8px)}
+    .proc-txt{padding:96px 72px;display:flex;flex-direction:column;justify-content:center;position:relative}
+    /* teal vertical accent */
+    .proc-txt::before{content:'';position:absolute;left:0;top:15%;bottom:15%;width:1px;background:linear-gradient(to bottom,transparent,rgba(26,144,128,.4),transparent)}
+    .proc-steps{margin-top:52px;display:flex;flex-direction:column}
+    .proc-step{padding:32px 0;border-bottom:1px solid rgba(26,144,128,.1);display:flex;gap:32px;cursor:none;transition:padding-left .4s cubic-bezier(.16,1,.3,1)}
+    .proc-step:first-child{border-top:1px solid rgba(26,144,128,.1)}
+    .proc-step:hover{padding-left:10px}
+    .proc-n{font-family:'Cormorant Garamond',serif;font-size:.875rem;color:var(--teal);flex-shrink:0;padding-top:3px;width:26px}
+    .proc-title{font-family:'Cormorant Garamond',serif;font-size:1.625rem;font-weight:400;color:var(--cream);line-height:1.1;margin-bottom:8px}
+    .proc-desc{font-size:.9375rem;font-weight:300;color:var(--cdim);line-height:1.75}
+
+    /* TESTIMONIALS — warm dark */
+    #testimonials{padding:128px 88px;background:var(--warm);position:relative;overflow:hidden}
+    .test-bg-q{position:absolute;top:-100px;left:30px;font-family:'Cormorant Garamond',serif;font-size:46vw;font-weight:300;line-height:1;color:rgba(196,146,10,.04);pointer-events:none;user-select:none}
+    .test-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:48px;gap:32px;position:relative;z-index:2}
+    .test-right{display:flex;flex-direction:column;align-items:flex-end;gap:16px;flex-shrink:0}
+    .test-count{font-family:'Cormorant Garamond',serif;font-size:1.125rem;color:var(--cmute)}
+    .test-count em{font-style:normal;color:var(--cream)}
+    .test-nav{display:flex;gap:10px}
+    .test-btn{width:48px;height:48px;border:1px solid rgba(196,146,10,.25);background:none;color:var(--cream);display:flex;align-items:center;justify-content:center;cursor:none;font-size:1.125rem;transition:border-color .25s,background .25s,color .25s,transform .3s cubic-bezier(.34,1.56,.64,1)}
+    .test-btn:hover{border-color:var(--gold);background:var(--gold);color:#000;transform:scale(1.1)}
+    .test-timing{position:relative;z-index:2;height:1px;background:rgba(196,146,10,.12);margin-bottom:48px}
+    .ttf{height:100%;background:var(--gold);transform:scaleX(0);transform-origin:left}
+    .ttf.run{transform:scaleX(1);transition:transform 5.5s linear}
+    .test-body{position:relative;z-index:2}
+    .test-stars{color:var(--gold);font-size:1rem;letter-spacing:3px;margin-bottom:24px}
+    .test-q{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3vw,2.625rem);font-weight:300;font-style:italic;color:var(--cream);line-height:1.52;max-width:940px;margin-bottom:40px;transition:opacity .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1)}
+    .test-q.out{opacity:0;transform:translateY(-16px)}
+    .test-q.in{opacity:0;transform:translateY(16px)}
+    .test-author{display:flex;align-items:center;gap:18px}
+    .test-av{width:48px;height:48px;border-radius:50%;background:rgba(196,146,10,.1);border:1px solid rgba(196,146,10,.3);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--gold)}
+    .test-name{font-size:1rem;font-weight:500;color:var(--cream)}
+    .test-loc{font-size:.875rem;color:var(--cmute);margin-top:2px}
+    .test-ver{margin-left:auto;font-size:.625rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+
+    /* CTA — photo background, high contrast */
+    #cta{min-height:62vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:100px 88px}
+    .cta-bg{position:absolute;inset:-10%;background-image:url('https://newerahomeconstructionandremodels.com/wp-content/uploads/2025/12/8232182157670598152.jpg');background-size:cover;background-position:center}
+    .cta-ov{position:absolute;inset:0;background:rgba(5,4,3,.87)}
+    /* subtle orange gradient glow at center */
+    .cta-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 60%,rgba(232,98,26,.12) 0%,transparent 70%)}
+    .cta-content{position:relative;z-index:2;max-width:820px}
+    .cta-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.75rem,5.5vw,5rem);font-weight:300;line-height:1.04;letter-spacing:-.03em;color:#fff;margin-bottom:14px;text-shadow:0 2px 24px rgba(0,0,0,.5)}
+    .cta-h2 em{font-style:italic;color:var(--orange)}
+    .cta-sub{font-size:1.0625rem;color:rgba(237,232,224,.75);font-weight:300;margin-bottom:44px;text-shadow:0 1px 12px rgba(0,0,0,.6)}
+    .cta-btns{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
+    .cta-tel{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;color:#fff;text-decoration:none;transition:color .2s;text-shadow:0 1px 10px rgba(0,0,0,.5)}
+    .cta-tel:hover{color:var(--orange)}
+    .cta-sep{width:1px;height:26px;background:rgba(237,232,224,.2)}
+
+    /* CONTACT */
+    #contact{display:grid;grid-template-columns:1fr 1.5fr}
+    .con-l{background:linear-gradient(135deg,#060919 0%,#090614 100%);padding:100px 68px;border-right:1px solid rgba(26,144,128,.15);display:flex;flex-direction:column;justify-content:center}
+    .con-details{margin-top:44px;display:flex;flex-direction:column;gap:28px}
+    .cd-lbl{font-size:.625rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
+    .cd-val{font-size:.9375rem;font-weight:300;color:var(--cream);line-height:1.7}
+    .cd-val a{color:var(--cream);text-decoration:none;transition:color .2s}
+    .cd-val a:hover{color:var(--teal)}
+    .con-r{background:linear-gradient(135deg,#08090F 0%,#0A0715 100%);padding:100px 84px}
+    .form-2c{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .fg{margin-bottom:14px}
+    .fg label{display:block;font-size:.625rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cmute);margin-bottom:8px}
+    .fg input,.fg select,.fg textarea{width:100%;background:rgba(237,232,224,.04);border:none;border-bottom:1px solid rgba(237,232,224,.1);color:var(--cream);padding:12px 0;font-family:'DM Sans',sans-serif;font-size:.9375rem;font-weight:300;outline:none;transition:border-color .25s;-webkit-appearance:none}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{border-bottom-color:var(--teal)}
+    .fg textarea{resize:vertical;min-height:96px}
+    .fg select option{background:var(--slate);color:var(--cream)}
+    .form-sub{margin-top:12px;width:100%;background:var(--orange);color:#fff;border:none;padding:15px;font-family:'DM Sans',sans-serif;font-size:.9375rem;font-weight:500;letter-spacing:.04em;cursor:none;position:relative;overflow:hidden;transition:opacity .2s,transform .25s cubic-bezier(.34,1.56,.64,1)}
+    .form-sub::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.15);transform:translateX(-101%);transition:transform .4s cubic-bezier(.16,1,.3,1)}
+    .form-sub:hover::before{transform:translateX(0)}
+    .form-sub:hover{opacity:.88;transform:translateY(-1px)}
+
+    /* FOOTER */
+    footer{background:var(--black);border-top:1px solid var(--border);padding:80px 88px 40px}
+    .ft-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:56px;padding-bottom:56px;border-bottom:1px solid var(--border);margin-bottom:36px}
+    .ft-logo img{height:44px;display:block;margin-bottom:18px}
+    .ft-tagline{font-size:.9375rem;font-weight:300;color:var(--cmute);line-height:1.75;max-width:230px}
+    .ft-col-t{font-size:.625rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream);font-weight:500;margin-bottom:20px}
+    .ft-links{list-style:none;display:flex;flex-direction:column;gap:11px}
+    .ft-links a{font-size:.9375rem;font-weight:300;color:var(--cmute);text-decoration:none;transition:color .2s}
+    .ft-links a:hover{color:var(--orange)}
+    .ft-btm{display:flex;align-items:center;justify-content:space-between}
+    .ft-copy{font-size:.8125rem;color:var(--cmute)}
+    .ft-badge{display:flex;align-items:center;gap:8px;background:rgba(26,144,128,.06);border:1px solid rgba(26,144,128,.15);padding:8px 16px;font-size:.6875rem;color:rgba(26,144,128,.7);letter-spacing:.08em}
+    .ft-bdot{width:6px;height:6px;background:var(--teal);border-radius:50%}
+
+    /* RESPONSIVE */
+    @media(max-width:1100px){
+      #hero{grid-template-columns:1fr;height:auto}
+      .hero-left{padding:120px 40px 72px}
+      .hero-right{height:52vw}
+      .svc-header{grid-template-columns:1fr}
+      #about{grid-template-columns:1fr}
+      .about-txt{padding:72px 40px}
+      .stats-grid{grid-template-columns:1fr 1fr}
+      .proc-inner{grid-template-columns:1fr}
+      .proc-img-col{height:52vw}
+      .proc-txt{padding:72px 56px}
+      #contact{grid-template-columns:1fr}
+      .con-l{padding:72px 40px;border-right:none;border-bottom:1px solid rgba(26,144,128,.15)}
+      .con-r{padding:72px 40px}
+      .ft-grid{grid-template-columns:1fr 1fr;gap:40px}
+    }
+    @media(max-width:768px){
+      #nav{display:none}
+      .hero-left{padding:96px 26px 56px}
+      #services{padding:80px 26px}
+      .svc-tag{display:none}
+      #about .about-txt{padding:60px 26px}
+      .stat-c{padding:44px 30px}
+      #portfolio{padding:72px 0}
+      .port-hdr,.port-ctrl,.port-track{padding-left:26px;padding-right:26px}
+      .port-card{flex:0 0 84vw}
+      #process{padding:80px 0}
+      .proc-txt{padding:60px 28px}
+      #testimonials{padding:80px 26px}
+      #cta{padding:80px 26px}
+      footer{padding:60px 26px 32px}
+      .form-2c{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body class="loading">
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- CURSOR -->
+  <div class="cur-dot" id="curDot"></div>
+  <div class="cur-ring" id="curRing"></div>
+  <div class="scroll-prog" id="scrollProg"></div>
+
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <img class="pre-logo" id="preLogo" src="https://newerahomeconstructionandremodels.com/wp-content/uploads/2025/12/logo1.png" alt=""/>
+    <div class="pre-counter"><span id="preNum">0</span><em>%</em></div>
+    <div class="pre-bar"><div class="pre-bar-f" id="preBarF"></div></div>
+    <div class="pre-lbl">Loading Experience</div>
+  </div>
+  <div class="pre-curtain" id="preCurtain"></div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" style="display:flex;align-items:center;cursor:none;margin-right:32px;flex-shrink:0"><img class="nav-logo" src="https://newerahomeconstructionandremodels.com/wp-content/uploads/2025/12/logo1.png" alt="New Era"/></a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#portfolio">Work</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Get a Quote</a>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="hero-left">
+      <div class="orb orb-1" aria-hidden="true"></div>
+      <div class="orb orb-2" aria-hidden="true"></div>
+      <div class="orb orb-3" aria-hidden="true"></div>
+
+      <div class="hero-brand" id="hBrand">
+        <img src="https://newerahomeconstructionandremodels.com/wp-content/uploads/2025/12/logo1.png" alt="New Era"/>
+        <div class="hero-brand-sep"></div>
+        <span class="hero-brand-name">Est. 2012 · Chatsworth, CA</span>
+      </div>
+
+      <div class="hero-eye" id="hEye">Southern California's Premier Builders</div>
+
+      <h1 class="hero-h1">
+        <span class="hl"><span class="hl-i" id="hl1">We Build</span></span>
+        <span class="hl"><span class="hl-i" id="hl2"><em>Dreams</em></span></span>
+        <span class="hl"><span class="hl-i" id="hl3">Into Reality</span></span>
+      </h1>
+
+      <p class="hero-sub" id="hSub">New Era Home Construction &amp; Remodeling — transforming Southern California living spaces with craftsmanship you can trust, from kitchens to custom builds.</p>
+
+      <div class="hero-btns" id="hBtns">
+        <a href="#contact" class="btn-o">Start Your Project</a>
+        <a href="#portfolio" class="btn-ghost">View Our Work →</a>
+      </div>
+
+      <div class="hero-stats" id="hStats">
+        <div><div class="hs-n">350<em>+</em></div><div class="hs-l">Projects Done</div></div>
+        <div><div class="hs-n">12<em>+</em></div><div class="hs-l">Years Active</div></div>
+        <div><div class="hs-n">98<em>%</em></div><div class="hs-l">Satisfaction</div></div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="slide active" style="background-image:url('https://newerahomeconstructionandremodels.com/wp-content/uploads/2025/12/8232182157670598152.jpg')"></div>
+      <div class="slide" style="background-image:url('https://newerahomeconstructionandremodels.com/wp-content/uploads/2025/12/7526855634992250990.jpg')"></div>
+      <div class="slide" style="background-image:url('https://newerahomeconstructionandremodels.com/wp-content/uploads/2025/12/7767377128560318968.jpg')"></div>
+      <div class="slide-ov"></div>
+      <svg class="rot-badge" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs><path id="rp" d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0"/></defs>
+        <text font-family="DM Sans,sans-serif" font-size="10" fill="rgba(237,232,224,.5)" letter-spacing="1.2">
+          <textPath href="#rp">NEW ERA CONSTRUCTION • SINCE 2012 • </textPath>
+        </text>
+      </svg>
+      <div class="slide-timing"><div class="stf run" id="heroTF"></div></div>
+      <div class="slide-dots">
+        <div class="sdot on" id="sd0"></div>
+        <div class="sdot" id="sd1"></div>
+        <div class="sdot" id="sd2"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="mq-wrap">
+    <div class="mq-track">
+      <span class="mqi">Kitchen Remodeling<span class="mdot"></span></span>
+      <span class="mqi">Bathroom Renovation<span class="mdot"></span></span>
+      <span class="mqi">Custom Home Builds<span class="mdot"></span></span>
+      <span class="mqi">Room Additions<span class="mdot"></span></span>
+      <span class="mqi">Commercial Upgrades<span class="mdot"></span></span>
+      <span class="mqi">Structural Work<span class="mdot"></span></span>
+      <span class="mqi">Flooring &amp; Tile<span class="mdot"></span></span>
+      <span class="mqi">Kitchen Remodeling<span class="mdot"></span></span>
+      <span class="mqi">Bathroom Renovation<span class="mdot"></span></span>
+      <span class="mqi">Custom Home Builds<span class="mdot"></span></span>
+      <span class="mqi">Room Additions<span class="mdot"></span></span>
+      <span class="mqi">Commercial Upgrades<span class="mdot"></span></span>
+      <span class="mqi">Structural Work<span class="mdot"></span></span>
+      <span class="mqi">Flooring &amp; Tile<span class="mdot"></span></span>
+    </div>
+  </div>
+
+  <!-- ── SERVICES ── -->
+  <section id="services">
+    <div class="svc-orb" aria-hidden="true"></div>
+    <div class="svc-header">
+      <div>
+        <div class="sec-lbl rv">What We Do</div>
+        <h2 class="sec-h2 rv d1">Expert craftsmanship<br/>for every <em>space</em></h2>
+      </div>
+      <p class="svc-intro rv d2">From complete kitchen overhauls to ground-up custom builds, we bring decades of Southern California expertise and an unwavering standard of quality to every project.</p>
+    </div>
+    <div class="svc-rows rv d1">
+      <div class="svc-row">
+        <span class="svc-num">01</span>
+        <span class="svc-title">Residential Remodeling</span>
+        <span class="svc-tag">Kitchens · Bathrooms · Additions</span>
+        <div class="svc-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12L12 2M12 2H5M12 2v7"/></svg></div>
+      </div>
+      <div class="svc-row">
+        <span class="svc-num">02</span>
+        <span class="svc-title">Commercial Upgrades</span>
+        <span class="svc-tag">Office · Retail · Workspace</span>
+        <div class="svc-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12L12 2M12 2H5M12 2v7"/></svg></div>
+      </div>
+      <div class="svc-row">
+        <span class="svc-num">03</span>
+        <span class="svc-title">Custom Home Builds</span>
+        <span class="svc-tag">Ground-Up · Foundation to Finish</span>
+        <div class="svc-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12L12 2M12 2H5M12 2v7"/></svg></div>
+      </div>
+      <div class="svc-row">
+        <span class="svc-num">04</span>
+        <span class="svc-title">Structural Expertise</span>
+        <span class="svc-tag">Reinforcement · Safety · Code-Compliant</span>
+        <div class="svc-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12L12 2M12 2H5M12 2v7"/></svg></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section id="about">
+    <div class="about-img">
+      <img src="https://newerahomeconstructionandremodels.com/wp-content/uploads/2025/12/7526855634992250990.jpg" alt="New Era project"/>
+      <div class="about-img-ov"></div>
+      <div class="about-logo-stamp"><img src="https://newerahomeconstructionandremodels.com/wp-content/uploads/2025/12/logo1.png" alt="New Era logo"/></div>
+      <div class="about-badge"><div class="ab-n">12+</div><div class="ab-t">Years building<br/>Southern California</div></div>
+    </div>
+    <div class="about-txt">
+      <div class="about-bg-logo" aria-hidden="true"><img src="https://newerahomeconstructionandremodels.com/wp-content/uploads/2025/12/logo1.png" alt=""/></div>
+      <div class="sec-lbl teal rv">Our Story</div>
+      <h2 class="sec-h2 teal rv d1">Built on quality,<br/>driven by <em>trust</em></h2>
+      <blockquote class="about-pull rv d2">"We don't just build structures — we build the places where life happens."</blockquote>
+      <p class="about-body rv d3">New Era Home Construction &amp; Remodeling is your go-to team for high-quality home transformations across Southern California. We specialize in kitchen and bathroom remodeling — delivering spaces that are not only functional but beautifully finished.<br/><br/>Whether you're upgrading your layout, replacing outdated fixtures, or reimagining the heart of your home, we bring a hands-on, detail-driven approach with communication you can count on at every step.</p>
+      <div class="about-tags rv d4">
+        <span class="about-tag">Licensed &amp; Insured</span>
+        <span class="about-tag">On-Time Delivery</span>
+        <span class="about-tag">5-Star Rated</span>
+        <span class="about-tag">SoCal Experts</span>
+        <span class="about-tag">No Hidden Costs</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STATS ── -->
+  <section id="stats">
+    <div class="stats-grid">
+      <div class="stat-c rv"><div class="stat-big"><span data-count="350">0</span><span class="stat-suf">+</span></div><div class="stat-lbl">Projects Completed</div></div>
+      <div class="stat-c rv d1"><div class="stat-big"><span data-count="12">0</span><span class="stat-suf">+</span></div><div class="stat-lbl">Years in Business</div></div>
+      <div class="stat-c rv d2"><div class="stat-big"><span data-count="98">0</span><span class="stat-suf">%</span></div><div class="stat-lbl">Client Satisfaction</div></div>
+      <div class="stat-c rv d3"><div class="stat-big"><span data-count="100">0</span><span class="stat-suf">%</span></div><div class="stat-lbl">Licensed &amp; Insured</div></div>
+    </div>
+  </section>
+
+  <!-- ── PORTFOLIO ── -->
+  <section id="portfolio">
+    <div class="port-hdr">
+      <div>
+        <div class="sec-lbl rv">Our Work</div>
+        <h2 class="sec-h2 rv d1">Projects that<br/><em>speak</em> for themselves</h2>
+      </div>
+      <div class="drag-h rv d2"><span class="darr">←</span> Drag to explore <span class="darr">→</span></div>
+    </div>
+    <div class="port-ctrl rv d1">
+      <div class="port-timing"><div class="ptf run" id="portTF"></div></div>
+      <div class="port-dots">
+        <div class="pdot on" id="pd0" onclick="portTo(0)"></div>
+        <div class="pdot" id="pd1" onclick="portTo(1)"></div>
+        <div class="pdot" id="pd2" onclick="portTo(2)"></div>
+      </div>
+    </div>
+    <div class="port-track" id="portTrack">
+      <div class="port-card">
+        <img src="https://newerahomeconstructionandremodels.com/wp-content/uploads/2025/12/8232182157670598152.jpg" alt="Kitchen" draggable="false"/>
+        <div class="port-grad"></div>
+        <div class="port-info"><div class="port-title">Kitchen Transformation</div><div class="port-sub">Chatsworth, CA · 2025</div></div>
+      </div>
+      <div class="port-card">
+        <img src="https://newerahomeconstructionandremodels.com/wp-content/uploads/2025/12/7526855634992250990.jpg" alt="Bathroom" draggable="false"/>
+        <div class="port-grad"></div>
+        <div class="port-info"><div class="port-title">Bathroom Remodel</div><div class="port-sub">Los Angeles, CA · 2025</div></div>
+      </div>
+      <div class="port-card">
+        <img src="https://newerahomeconstructionandremodels.com/wp-content/uploads/2025/12/7767377128560318968.jpg" alt="Full Build" draggable="false"/>
+        <div class="port-grad"></div>
+        <div class="port-info"><div class="port-title">Full Home Build</div><div class="port-sub">Northridge, CA · 2024</div></div>
+      </div>
+      <div class="port-card end">
+        <div class="port-end-in">
+          <div class="port-end-h">Ready to start your own project?</div>
+          <a href="#contact" class="port-end-lnk">Get a free quote →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROCESS ── -->
+  <section id="process">
+    <div class="proc-inner">
+      <div class="proc-img-col">
+        <img src="https://newerahomeconstructionandremodels.com/wp-content/uploads/2025/12/7767377128560318968.jpg" alt="Construction process"/>
+        <div class="proc-img-ov"></div>
+        <div class="proc-img-tag">Built Right. Every Time.</div>
+      </div>
+      <div class="proc-txt">
+        <div class="sec-lbl teal rv">How We Work</div>
+        <h2 class="sec-h2 teal rv d1">A process built for<br/>your <em>peace of mind</em></h2>
+        <div class="proc-steps">
+          <div class="proc-step rv d1">
+            <span class="proc-n">01</span>
+            <div><div class="proc-title">Vision &amp; Planning</div><p class="proc-desc">A thorough consultation to understand your goals, timeline, and budget — then a detailed plan with no surprises in the fine print.</p></div>
+          </div>
+          <div class="proc-step rv d2">
+            <span class="proc-n">02</span>
+            <div><div class="proc-title">Design &amp; Build</div><p class="proc-desc">Our skilled crew executes every phase with precision — from structural framing to final finishes, keeping you informed at every milestone.</p></div>
+          </div>
+          <div class="proc-step rv d3">
+            <span class="proc-n">03</span>
+            <div><div class="proc-title">Final Walkthrough</div><p class="proc-desc">Before handing over the keys, we conduct a rigorous inspection — ensuring every detail meets our strict quality standard and your full expectations.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ── -->
+  <section id="testimonials">
+    <div class="test-bg-q" aria-hidden="true">"</div>
+    <div class="test-top">
+      <div>
+        <div class="sec-lbl gold rv">Client Stories</div>
+        <h2 class="sec-h2 gold rv d1" style="font-size:clamp(2rem,3.5vw,3.25rem)">Words from those<br/>we've <em>transformed</em></h2>
+      </div>
+      <div class="test-right rv d2">
+        <div class="test-count"><em id="tCurr">01</em> / <span>04</span></div>
+        <div class="test-nav">
+          <button class="test-btn" onclick="moveTest(-1)">←</button>
+          <button class="test-btn" onclick="moveTest(1)">→</button>
+        </div>
+      </div>
+    </div>
+    <div class="test-timing rv d1"><div class="ttf run" id="testTF"></div></div>
+    <div class="test-body rv d2">
+      <div class="test-stars">★★★★★</div>
+      <div class="test-q" id="testQ">"We hired New Era for a complete kitchen overhaul — new layout, custom cabinets, quartz countertops, and a herringbone backsplash. They finished two days ahead of schedule and the craftsmanship is immaculate. Our neighbors keep asking who we used."</div>
+      <div class="test-author">
+        <div class="test-av" id="testAv">E</div>
+        <div><div class="test-name" id="testName">Emily R.</div><div class="test-loc" id="testLoc">Chatsworth, CA</div></div>
+        <div class="test-ver">✓ Verified Client</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section id="cta">
+    <div class="cta-bg" id="ctaBg"></div>
+    <div class="cta-ov"></div>
+    <div class="cta-glow"></div>
+    <div class="cta-content">
+      <h2 class="cta-h2 rv">Ready to transform your space into something <em>extraordinary?</em></h2>
+      <p class="cta-sub rv d1">Free consultation. No commitment. Just great results.</p>
+      <div class="cta-btns rv d2">
+        <a href="tel:+17472532794" class="cta-tel">(747) 253-2794</a>
+        <div class="cta-sep"></div>
+        <a href="tel:+13238723620" class="cta-tel">(323) 872-3620</a>
+        <div class="cta-sep"></div>
+        <a href="#contact" class="btn-o">Request Free Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact">
+    <div class="con-l">
+      <div class="sec-lbl teal rv">Contact Us</div>
+      <h2 class="sec-h2 teal rv d1" style="font-size:clamp(1.875rem,3vw,3rem)">Let's build<br/><em>something</em><br/>together</h2>
+      <div class="con-details">
+        <div class="rv d2"><div class="cd-lbl">Phone</div><div class="cd-val"><a href="tel:+17472532794">(747) 253-2794</a><br/><a href="tel:+13238723620">(323) 872-3620</a></div></div>
+        <div class="rv d3"><div class="cd-lbl">Email</div><div class="cd-val"><a href="mailto:nelson@newerahomeconstructionandremodels.com">nelson@newerahomeconstructionandremodels.com</a></div></div>
+        <div class="rv d4"><div class="cd-lbl">Office</div><div class="cd-val">20551 Plummer St<br/>Chatsworth, CA 91311</div></div>
+      </div>
+    </div>
+    <div class="con-r">
+      <div class="sec-lbl rv">Send a Message</div>
+      <form onsubmit="handleForm(event)" style="margin-top:26px">
+        <div class="form-2c">
+          <div class="fg rv d1"><label>First Name</label><input type="text" name="fn" placeholder="John" required/></div>
+          <div class="fg rv d2"><label>Last Name</label><input type="text" name="ln" placeholder="Smith" required/></div>
+        </div>
+        <div class="form-2c">
+          <div class="fg rv d1"><label>Phone</label><input type="tel" name="ph" placeholder="(555) 000-0000"/></div>
+          <div class="fg rv d2"><label>Email</label><input type="email" name="em" placeholder="you@example.com" required/></div>
+        </div>
+        <div class="fg rv d1"><label>Service Needed</label>
+          <select name="svc">
+            <option value="">Select a service…</option>
+            <option>Kitchen Remodeling</option><option>Bathroom Renovation</option>
+            <option>Custom Home Build</option><option>Commercial Upgrade</option>
+            <option>Room Addition</option><option>Structural Work</option><option>Other</option>
+          </select>
+        </div>
+        <div class="fg rv d2"><label>Project Details</label><textarea name="msg" placeholder="Tell us about your project — scope, timeline, and any requirements…"></textarea></div>
+        <button type="submit" class="form-sub rv d3">Send Message →</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="ft-grid">
+      <div>
+        <div class="ft-logo"><a href="#" style="cursor:none"><img src="https://newerahomeconstructionandremodels.com/wp-content/uploads/2025/12/logo1.png" alt="New Era"/></a></div>
+        <p class="ft-tagline">Southern California's trusted home construction and remodeling specialists — turning your house into a home since 2012.</p>
+      </div>
+      <div>
+        <div class="ft-col-t">Services</div>
+        <ul class="ft-links">
+          <li><a href="#services">Kitchen Remodeling</a></li>
+          <li><a href="#services">Bathroom Renovation</a></li>
+          <li><a href="#services">Custom Builds</a></li>
+          <li><a href="#services">Commercial Upgrades</a></li>
+          <li><a href="#services">Structural Work</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ft-col-t">Company</div>
+        <ul class="ft-links">
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#portfolio">Our Work</a></li>
+          <li><a href="#process">Our Process</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ft-col-t">Contact</div>
+        <ul class="ft-links">
+          <li><a href="tel:+17472532794">(747) 253-2794</a></li>
+          <li><a href="tel:+13238723620">(323) 872-3620</a></li>
+          <li><a href="mailto:nelson@newerahomeconstructionandremodels.com">Email Us</a></li>
+          <li>20551 Plummer St</li>
+          <li>Chatsworth, CA 91311</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-btm">
+      <p class="ft-copy">© 2026 New Era Home Construction &amp; Remodeling. All rights reserved.</p>
+      <div class="ft-badge"><div class="ft-bdot"></div>California Licensed Contractor</div>
+    </div>
+  </footer>
+
+<script>
+/* ── PRELOADER ── */
+const preLogo=document.getElementById('preLogo'),preNum=document.getElementById('preNum'),preBarF=document.getElementById('preBarF'),preCurt=document.getElementById('preCurtain'),preEl=document.getElementById('preloader');
+let pct=0;
+setTimeout(()=>preLogo.classList.add('vis'),100);
+const pi=setInterval(()=>{
+  pct+=Math.floor(Math.random()*5)+2;
+  if(pct>=100){pct=100;clearInterval(pi);setTimeout(launch,180)}
+  preNum.textContent=pct;
+  preBarF.style.transition='transform .15s cubic-bezier(.16,1,.3,1)';
+  preBarF.style.transform=`scaleX(${pct/100})`;
+},28);
+function launch(){
+  preCurt.style.transition='transform .55s cubic-bezier(.7,0,.3,1)';
+  preCurt.style.transform='scaleY(1)';
+  preCurt.style.transformOrigin='top';
+  setTimeout(()=>{
+    preEl.style.opacity='0';preEl.style.transition='opacity .2s';
+    preCurt.style.transformOrigin='bottom';preCurt.style.transform='scaleY(0)';
+    setTimeout(()=>{
+      preEl.style.display='none';preCurt.style.display='none';
+      document.body.classList.remove('loading');
+      heroIn();
+    },580);
+  },580);
+}
+
+/* ── HERO ENTRANCE ── */
+function heroIn(){
+  const E='cubic-bezier(.16,1,.3,1)';
+  const els=[
+    [document.getElementById('hBrand'),.1],
+    [document.getElementById('hEye'),.22],
+    [document.getElementById('hl1'),.34],
+    [document.getElementById('hl2'),.46],
+    [document.getElementById('hl3'),.58],
+    [document.getElementById('hSub'),.74],
+    [document.getElementById('hBtns'),.88],
+    [document.getElementById('hStats'),1.04],
+  ];
+  els.forEach(([el,d])=>{
+    el.style.transition=`opacity .8s ${E} ${d}s, transform .85s ${E} ${d}s`;
+    requestAnimationFrame(()=>{el.style.opacity='1';el.style.transform='translateY(0)'});
+  });
+}
+
+/* ── CURSOR ── */
+const dot=document.getElementById('curDot'),ring=document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function tick(){
+  rx+=(mx-rx)*.1;ry+=(my-ry)*.1;
+  dot.style.left=mx+'px';dot.style.top=my+'px';
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(tick);
+})();
+document.querySelectorAll('a,button,.svc-row,.port-card,.proc-step,.about-tag').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
+});
+
+/* ── SCROLL PROGRESS ── */
+const prog=document.getElementById('scrollProg');
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY,h=document.body.scrollHeight-window.innerHeight;
+  prog.style.transform=`scaleX(${s/h})`;
+},{passive:true});
+
+/* ── NAV — hidden in hero, appears after scrolling past it ── */
+const nav=document.getElementById('nav');
+let lastSY=0;
+window.addEventListener('scroll',()=>{
+  const curr=window.scrollY;
+  const heroH=document.getElementById('hero').offsetHeight;
+  if(curr < heroH - 80){
+    // still inside hero — keep nav hidden
+    nav.classList.remove('vis');
+    nav.classList.remove('hide');
+  } else {
+    // past hero — show nav, hide on scroll-down / show on scroll-up
+    if(curr > lastSY + 8){ nav.classList.add('hide'); }
+    else if(curr < lastSY - 8){ nav.classList.remove('hide'); nav.classList.add('vis'); }
+    else { nav.classList.add('vis'); }
+  }
+  lastSY=curr;
+},{passive:true});
+
+/* ── HERO PARALLAX ── */
+window.addEventListener('scroll',()=>{
+  if(window.scrollY<window.innerHeight*1.4){
+    document.querySelectorAll('.slide').forEach(s=>{
+      const base=s.classList.contains('active')?'scale(1)':'scale(1.07)';
+      s.style.transform=`${base} translateY(${window.scrollY*.25}px)`;
+    });
+  }
+  const ctaEl=document.getElementById('cta');
+  const ctaBg=document.getElementById('ctaBg');
+  const r=ctaEl.getBoundingClientRect();
+  if(r.top<window.innerHeight&&r.bottom>0){
+    ctaBg.style.transform=`translateY(${((window.innerHeight-r.top)/(window.innerHeight+r.height)-.5)*50}px)`;
+  }
+},{passive:true});
+
+/* ── HERO SLIDESHOW ── */
+const slides=document.querySelectorAll('.slide');
+const heroTF=document.getElementById('heroTF');
+const sdots=[document.getElementById('sd0'),document.getElementById('sd1'),document.getElementById('sd2')];
+let sIdx=0,sTimer;
+function heroSlide(n){
+  slides[sIdx].classList.remove('active');sdots[sIdx].classList.remove('on');
+  sIdx=(n!=null?n:(sIdx+1))%slides.length;
+  slides[sIdx].classList.add('active');sdots[sIdx].classList.add('on');
+  resetBar(heroTF);
+}
+function resetBar(el){
+  el.classList.remove('run');el.style.transition='none';el.style.transform='scaleX(0)';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('run')));
+}
+sTimer=setInterval(heroSlide,5000);
+sdots.forEach((d,i)=>d.addEventListener('click',()=>{clearInterval(sTimer);heroSlide(i);sTimer=setInterval(heroSlide,5000)}));
+
+/* ── PORTFOLIO AUTO-SCROLL ── */
+const portTrack=document.getElementById('portTrack');
+const portTF=document.getElementById('portTF');
+const pdots=document.querySelectorAll('.pdot');
+const pcards=document.querySelectorAll('.port-card:not(.end)');
+let pIdx=0,pTimer,pDrag=false,pSX=0,pSS=0,pMoved=false;
+function portTo(n){
+  pIdx=Math.max(0,Math.min(n,pcards.length-1));
+  portTrack.scrollTo({left:pcards[pIdx].offsetLeft-88,behavior:'smooth'});
+  pdots.forEach((d,i)=>d.classList.toggle('on',i===pIdx));
+  resetBar(portTF);
+}
+function portNext(){portTo((pIdx+1)%pcards.length)}
+pTimer=setInterval(portNext,4500);
+pdots.forEach((d,i)=>d.addEventListener('click',()=>{clearInterval(pTimer);portTo(i);pTimer=setInterval(portNext,4500)}));
+portTrack.addEventListener('mousedown',e=>{pDrag=true;pSX=e.pageX;pSS=portTrack.scrollLeft;pMoved=false;portTrack.classList.add('drag');clearInterval(pTimer)});
+window.addEventListener('mousemove',e=>{if(!pDrag)return;const d=e.pageX-pSX;if(Math.abs(d)>5)pMoved=true;portTrack.scrollLeft=pSS-d});
+window.addEventListener('mouseup',()=>{if(pDrag){pDrag=false;portTrack.classList.remove('drag');pTimer=setInterval(portNext,4500)}});
+portTrack.addEventListener('click',e=>{if(pMoved)e.preventDefault()});
+portTrack.addEventListener('touchstart',e=>{pSX=e.touches[0].pageX;pSS=portTrack.scrollLeft},{passive:true});
+portTrack.addEventListener('touchmove',e=>{portTrack.scrollLeft=pSS-(e.touches[0].pageX-pSX)},{passive:true});
+
+/* ── TESTIMONIALS AUTO ── */
+const reviews=[
+  {q:'"We hired New Era for a complete kitchen overhaul — new layout, custom cabinets, quartz countertops, and a herringbone backsplash. They finished two days ahead of schedule and the craftsmanship is immaculate. Our neighbors keep asking who we used."',n:'Emily R.',l:'Chatsworth, CA',a:'E'},
+  {q:'"Our office renovation was seamless from day one. New Era worked nights and weekends so we never lost a single business day. The space is modern, functional, and exactly what we envisioned — and they came in under budget."',n:'Carlos M.',l:'Los Angeles, CA',a:'C'},
+  {q:'"They remodeled both bathrooms while we were still living there — minimal mess, zero surprises on the bill. The finished product looks like it belongs in a design magazine. We\'ve already recommended New Era to three friends."',n:'Sarah K.',l:'Northridge, CA',a:'S'},
+  {q:'"New Era transformed our retail storefront with minimal downtime and stunning results. Foot traffic has gone up noticeably since the renovation and customers compliment the space constantly."',n:'David T.',l:'Burbank, CA',a:'D'},
+];
+let rIdx=0;
+const tQ=document.getElementById('testQ'),tAv=document.getElementById('testAv'),tNm=document.getElementById('testName'),tLc=document.getElementById('testLoc'),tCurr=document.getElementById('tCurr'),testTF=document.getElementById('testTF');
+let tTimer;
+function startTest(){
+  resetBar(testTF);
+  clearTimeout(tTimer);
+  tTimer=setTimeout(()=>moveTest(1),5500);
+}
+function moveTest(dir){
+  tQ.classList.add('out');
+  setTimeout(()=>{
+    rIdx=(rIdx+dir+reviews.length)%reviews.length;
+    const r=reviews[rIdx];
+    tQ.textContent=r.q;tAv.textContent=r.a;tNm.textContent=r.n;tLc.textContent=r.l;
+    tCurr.textContent=String(rIdx+1).padStart(2,'0');
+    tQ.classList.remove('out');tQ.classList.add('in');
+    requestAnimationFrame(()=>requestAnimationFrame(()=>tQ.classList.remove('in')));
+    startTest();
+  },350);
+}
+startTest();
+document.getElementById('testimonials').addEventListener('mouseenter',()=>clearTimeout(tTimer));
+document.getElementById('testimonials').addEventListener('mouseleave',()=>startTest());
+
+/* ── SCROLL REVEALS ── */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')});
+},{threshold:.07});
+document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>io.observe(el));
+
+/* ── COUNT-UP ── */
+const co=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target,target=+el.dataset.count,t0=performance.now();
+    el.style.filter='blur(8px)';el.style.transition='filter .8s cubic-bezier(.16,1,.3,1)';
+    (function step(t){
+      const p=Math.min((t-t0)/1800,1),ease=1-Math.pow(1-p,4);
+      el.textContent=Math.round(ease*target);
+      if(p>=.3)el.style.filter='blur(0)';
+      if(p<1)requestAnimationFrame(step);
+    })(t0);
+    co.unobserve(el);
+  });
+},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>co.observe(el));
+
+/* ── 3D TILT on service rows ── */
+document.querySelectorAll('.svc-row').forEach(row=>{
+  row.addEventListener('mousemove',e=>{
+    const r=row.getBoundingClientRect();
+    const x=((e.clientX-r.left)/r.width-.5)*7;
+    const y=((e.clientY-r.top)/r.height-.5)*-3.5;
+    row.style.transform=`perspective(900px) rotateX(${y}deg) rotateY(${x}deg) translateZ(3px)`;
+    row.style.transition='transform .08s';
+  });
+  row.addEventListener('mouseleave',()=>{
+    row.style.transform='perspective(900px) rotateX(0) rotateY(0) translateZ(0)';
+    row.style.transition='transform .6s cubic-bezier(.34,1.56,.64,1), padding-left .4s cubic-bezier(.16,1,.3,1), background .3s, border-color .3s';
+  });
+});
+
+/* ── TEXT SCRAMBLE on labels ── */
+const GL='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789·';
+function scramble(el){
+  const f=el.textContent,steps=20;let i=0;
+  const id=setInterval(()=>{
+    el.textContent=f.split('').map((c,j)=>c===' '?' ':j<i*(f.length/steps)?c:GL[Math.floor(Math.random()*GL.length)]).join('');
+    if(i>=steps){el.textContent=f;clearInterval(id)}i++;
+  },38);
+}
+const lblIo=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){scramble(e.target);lblIo.unobserve(e.target)}});
+},{threshold:.5});
+document.querySelectorAll('.sec-lbl').forEach(el=>lblIo.observe(el));
+
+/* ── MAGNETIC BUTTONS ── */
+document.querySelectorAll('.btn-o,.nav-cta').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    btn.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.3}px,${(e.clientY-r.top-r.height/2)*.3}px)`;
+    btn.style.transition='transform .1s';
+  });
+  btn.addEventListener('mouseleave',()=>{
+    btn.style.transform='translate(0,0)';
+    btn.style.transition='transform .55s cubic-bezier(.34,1.56,.64,1)';
+  });
+});
+
+/* ── FORM ── */
+function handleForm(e){
+  e.preventDefault();
+  const d=new FormData(e.target);
+  const b=`Name: ${d.get('fn')} ${d.get('ln')}\nPhone: ${d.get('ph')}\nEmail: ${d.get('em')}\nService: ${d.get('svc')}\nMessage: ${d.get('msg')}`;
+  window.location.href=`mailto:nelson@newerahomeconstructionandremodels.com?subject=Quote Request — New Era Construction&body=${encodeURIComponent(b)}`;
+}
+</script>
+</body>
+</html>
