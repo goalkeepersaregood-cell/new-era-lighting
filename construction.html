@@ -681,7 +681,7 @@
       <h2 class="sec-h2 teal rv d1" style="font-size:clamp(1.875rem,3vw,3rem)">Let's build<br/><em>something</em><br/>together</h2>
       <div class="con-details">
         <div class="rv d2"><div class="cd-lbl">Phone</div><div class="cd-val"><a href="tel:+17472532794">(747) 253-2794</a><br/><a href="tel:+13238723620">(323) 872-3620</a></div></div>
-        <div class="rv d3"><div class="cd-lbl">Email</div><div class="cd-val"><a href="mailto:nelson@newerahomeconstructionandremodels.com">nelson@newerahomeconstructionandremodels.com</a></div></div>
+        <div class="rv d3"><div class="cd-lbl">Email</div><div class="cd-val"><a href="mailto:nelson@newerale.com">nelson@newerale.com</a></div></div>
         <div class="rv d4"><div class="cd-lbl">Office</div><div class="cd-val">20551 Plummer St<br/>Chatsworth, CA 91311</div></div>
       </div>
     </div>
@@ -745,7 +745,7 @@
         <ul class="ft-links">
           <li><a href="tel:+17472532794">(747) 253-2794</a></li>
           <li><a href="tel:+13238723620">(323) 872-3620</a></li>
-          <li><a href="mailto:nelson@newerahomeconstructionandremodels.com">Email Us</a></li>
+          <li><a href="mailto:nelson@newerale.com">Email Us</a></li>
           <li>20551 Plummer St</li>
           <li>Chatsworth, CA 91311</li>
         </ul>
@@ -998,10 +998,7 @@ document.querySelectorAll('.btn-o,.nav-cta').forEach(btn=>{
 
 /* ── FORM ── */
 function handleForm(e){
-  e.preventDefault();
-  const d=new FormData(e.target);
-  const b=`Name: ${d.get('fn')} ${d.get('ln')}\nPhone: ${d.get('ph')}\nEmail: ${d.get('em')}\nService: ${d.get('svc')}\nMessage: ${d.get('msg')}`;
-  window.location.href=`mailto:nelson@newerahomeconstructionandremodels.com?subject=Quote Request — New Era Construction&body=${encodeURIComponent(b)}`;
+  // Let FormSubmit handle the POST — no preventDefault
 }
 </script>
 </body>

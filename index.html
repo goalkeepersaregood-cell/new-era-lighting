@@ -1933,15 +1933,7 @@
 
   // ─── FORM SUBMIT ───
   function handleFormSubmit(e) {
-    e.preventDefault();
-    const form = e.target;
-    const data = new FormData(form);
-    const body = Array.from(data.entries()).map(([k,v]) => `${k}: ${v}`).join('\n');
-    window.location.href = `mailto:nelson@newerale.com?subject=New Era Electrical Quote Request&body=${encodeURIComponent(body)}`;
-    setTimeout(() => {
-      form.style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
-    }, 500);
+    // Let FormSubmit handle the POST — no preventDefault
   }
 
   // ─── PORTFOLIO CAROUSEL ───
