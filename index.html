@@ -1745,7 +1745,10 @@
         <h3 class="form-title">Request a Free Quote</h3>
         <p class="form-sub">Fill out the form below and we'll get back to you within one business day. For emergencies, call us directly.</p>
 
-        <form action="mailto:nelson@newerale.com" method="post" enctype="text/plain" onsubmit="handleFormSubmit(event)">
+        <form action="https://formsubmit.co/nelson@newerale.com" method="POST" onsubmit="handleFormSubmit(event)">
+          <input type="hidden" name="_subject" value="New Quote Request — New Era Lighting & Electrical"/>
+          <input type="hidden" name="_captcha" value="false"/>
+          <input type="hidden" name="_next" value="https://goalkeepersaregood-cell.github.io/new-era-lighting/?submitted=true"/>
           <div class="form-row">
             <div class="form-group">
               <label for="fname">First Name</label>
